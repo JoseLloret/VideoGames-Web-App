@@ -1,5 +1,17 @@
 import axios from 'axios';
 //conexion entre el Front y el Back
+export function deleteGame(id){
+    return async function(dispatch){
+        try{
+            const deleted = await axios.delete(`http://localhost:3001/delete/${id}`)
+            return dispatch({
+                type: 'GET_DELETE',
+            })
+        } catch(error){
+            console.log(error)
+        }
+    }
+}
 
 export function getGames(){
     return async function(dispatch){
@@ -113,6 +125,24 @@ export function filtroMin(){
 export function filtroGenre(payload){
     return{
         type: 'FILTER_GENRE',
+        payload
+    }
+}
+
+export function filtroFromDb(){
+    return{
+        type: 'FROM_DB',
+    }
+}    
+export function filtroFromApi(){
+    return{
+        type: 'FROM_API',
+    }
+}
+
+export function filtroFrom(payload){
+    return{
+        type: 'FILTER_FROM',
         payload
     }
 }

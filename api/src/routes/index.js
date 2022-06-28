@@ -82,5 +82,19 @@ router.post('/videogames', async (req, res, next)=>{
     }
 })
 
+router.delete('/delete/:idVideogame', async (req, res, next)=>{
+    const id = req.params.idVideogame
+    if(!id) return res.status(404).send('Faltan datos obligatorios')
+    if(typeof(id) !== 'string') return res.status(404).send('Solo pueden eliminarse video games de base de datos')
+    try{
+        const games = await Videogame.destroy({
+            where: {id: id}
+        })
+        res.send('VideoGame eliminado')
+    } catch(error){
+        next(error)
+    }
+})
+
 
 module.exports = router;

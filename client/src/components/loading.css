@@ -1,0 +1,107 @@
+#blurringTextG{
+	text-align: center;
+	margin:auto;
+}
+
+.blurringTextG{
+	color:transparent;
+	font-family:Arial;
+	font-size:84px;
+	text-decoration:none;
+	font-weight:normal;
+	font-style:normal;
+	display:inline-block;
+	text-shadow: rgb(232,105,232) 0 0 0;
+	animation-name:bounce_blurringTextG;
+		-o-animation-name:bounce_blurringTextG;
+		-ms-animation-name:bounce_blurringTextG;
+		-webkit-animation-name:bounce_blurringTextG;
+		-moz-animation-name:bounce_blurringTextG;
+	animation-duration:2.09s;
+		-o-animation-duration:2.09s;
+		-ms-animation-duration:2.09s;
+		-webkit-animation-duration:2.09s;
+		-moz-animation-duration:2.09s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+}
+
+
+
+@keyframes bounce_blurringTextG{
+	0%{
+		text-shadow: rgb(224,121,224) 0 0 0;
+	}
+
+	50%{
+		text-shadow: rgb(224,134,224) 0 0 68px;
+	}
+
+	100%{
+		text-shadow: rgb(219,147,219) 0 0 0;
+	}
+}
+
+@-o-keyframes bounce_blurringTextG{
+	0%{
+		text-shadow: rgb(224,121,224) 0 0 0;
+	}
+
+	50%{
+		text-shadow: rgb(224,134,224) 0 0 68px;
+	}
+
+	100%{
+		text-shadow: rgb(219,147,219) 0 0 0;
+	}
+}
+
+@-ms-keyframes bounce_blurringTextG{
+	0%{
+		text-shadow: rgb(224,121,224) 0 0 0;
+	}
+
+	50%{
+		text-shadow: rgb(224,134,224) 0 0 68px;
+	}
+
+	100%{
+		text-shadow: rgb(219,147,219) 0 0 0;
+	}
+}
+
+@-webkit-keyframes bounce_blurringTextG{
+	0%{
+		text-shadow: rgb(224,121,224) 0 0 0;
+	}
+
+	50%{
+		text-shadow: rgb(224,134,224) 0 0 68px;
+	}
+
+	100%{
+		text-shadow: rgb(219,147,219) 0 0 0;
+	}
+}
+
+@-moz-keyframes bounce_blurringTextG{
+	0%{
+		text-shadow: rgb(224,121,224) 0 0 0;
+	}
+
+	50%{
+		text-shadow: rgb(224,134,224) 0 0 68px;
+	}
+
+	100%{
+		text-shadow: rgb(219,147,219) 0 0 0;
+	}
+}

@@ -43,6 +43,10 @@ function rootReducer (state = initialState, action){
                 ...state,
                 detail:{}
             }
+        case 'GET_DELETE':
+            return{
+                ...state,
+            }
         case 'CLEAN_GAMES':
             return{
                 ...state,
@@ -90,7 +94,30 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 games: statusFiltered
-            }      
+            }
+        case 'FROM_DB':
+            const games = state.allGames
+            const gamesFiltered =games.filter(e =>e.id.length > 34)
+            return{
+                ...state,
+                games: gamesFiltered
+            }
+        case 'FROM_API':
+            const gamesApi = state.allGames
+            const gamesApiFiltered =gamesApi.filter(e =>e.id.length < 34)
+            return{
+                ...state,
+                games: gamesApiFiltered
+        }
+        case 'FILTER_FROM':
+            const gamesFrom = state.allGames           
+            const   api = action.payload === 'api',
+                    db = action.payload === 'db' , 
+                    gamesFromFiltered = api ? gamesFrom.filter(e =>typeof(e.id) === 'number') : db ? gamesFrom.filter(e =>typeof(e.id) === 'string') : gamesFrom
+            return{
+                ...state,
+                games: gamesFromFiltered
+            }     
         default:
             return state;
     }

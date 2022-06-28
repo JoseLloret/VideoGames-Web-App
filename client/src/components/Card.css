@@ -1,0 +1,30 @@
+.card{
+    border-radius: 10px;
+    min-height: 50px;
+    font-weight: bold;
+    position: center;
+    overflow: hidden;
+    width: 80%;
+    padding-top: 10px;
+    background: rgba(128, 128, 128, 0.453);
+    box-shadow: 2px 2px 10px 1px #000;
+}
+
+.img-card{
+    border-radius: 10px;
+    width: 90%;
+    height: 150px;
+}
+
+.tit-card{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-decoration-line: none;
+    box-shadow: none;
+}
+
+.info-card{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    box-shadow: none;
+}
