@@ -44,6 +44,7 @@ export default function Home(){
         } else if(e.target.value === 'za'){
             dispatch(filtroDesc())
         }
+        setCurrentPage(1)
         setOrderAlfabet(e.target.value)
     }
     function ratingChange(e){
@@ -53,6 +54,7 @@ export default function Home(){
         } else if(e.target.value === 'max'){
             dispatch(filtroMax())
         }
+        setCurrentPage(1)
         setOrderRating(e.target.value)
     }
     // function fromChange(e){
@@ -66,10 +68,12 @@ export default function Home(){
     // }
     function handleFilterStatus(e){
         dispatch(filtroGenre(e.target.value))
+        setCurrentPage(1)
         console.log(e.target.value)
     }
     function handleFilterFrom(e){
         dispatch(filtroFrom(e.target.value))
+        setCurrentPage(1)
         console.log(e.target.value)
     }
     
