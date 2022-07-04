@@ -2,7 +2,22 @@ const axios = require('axios');
 const {Videogame, Genres, Platforms} = require ('../db');
 const API_KEY= '3182f8c6ce8e46559273c22dc8401437'
 
-
+async function getGamesApiId(){
+    let games = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+    let gamesData = await games.data.results.map(e=>{
+        return{
+            id: e.id,
+            name: e.name,
+            description: e.description,
+            released: e.released,
+            rating: e.rating,
+            image: e.background_image,
+            platforms: e.platforms.map(e=>e.platform.name).join(", "),
+            genres: e.genres.map(e=>e.name).join(", ") 
+        }
+    })
+    return gamesData
+}
 async function getGamesApi(){
     let page1 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`)
     let page2 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2`)
@@ -20,6 +35,7 @@ async function getGamesApi(){
         return{
             id: e.id,
             name: e.name,
+            description: e.description,
             released: e.released,
             rating: e.rating,
             image: e.background_image,
@@ -58,7 +74,12 @@ async function getAllGames(){
     const gamesDb = await getGamesDb()
     const allGames = gamesApi.concat(gamesDb)
     return allGames
-    
+}
+async function getAllGames2(){
+    const gamesApi = await getGamesApiId()
+    const gamesDb = await getGamesDb()
+    const allGames = gamesApi.concat(gamesDb)
+    return allGames
 }
 
 
@@ -68,4 +89,6 @@ module.exports={
     getGamesApi,
     getGamesDb,
     getAllGames,
+    getGamesApiId,
+    getAllGames2,
 }

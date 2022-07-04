@@ -7,7 +7,7 @@ const API_KEY= '3182f8c6ce8e46559273c22dc8401437'
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
-const {getAllGames, } = require('../controller/gamesController');
+const {getAllGames, getGamesDb} = require('../controller/gamesController');
 const {getAllGenres} = require('../controller/genresController');
 const {getPlatforms} = require('../controller/platformController');
 
@@ -29,13 +29,51 @@ router.get('/videogames', async(req, res)=>{
     }
 })
 
+// router.get('/videogame/:idVideogame', async (req, res)=>{
+//     const id = req.params.idVideogame
+//     const allGames = await getAllGames2();
+//     if(id){
+//         const gameId = await allGames.filter(e => e.id == id)
+//         gameId.length ? res.status(200).json(gameId) : res.status(404).send('El ID no existe')
+//     }
+// })
+router.get('/video/:idVideogame', async (req, res)=>{
+    const id = req.params.idVideogame
+    let games = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+    let gamesData = [{        
+            id: games.data.id,
+            name: games.data.name,
+            description: games.data.description.replace(/<[^>]+>/g, ''),
+            released: games.data.released,
+            rating: games.data.rating,
+            image: games.data.background_image,
+            platforms: games.data.platforms.map(e=>e.platform.name).join(", "),
+            genres: games.data.genres.map(e=>e.name).join(", ") 
+        
+    }]
+    console.log(gamesData)
+    res.status(200).send(gamesData)
+})
 router.get('/videogame/:idVideogame', async (req, res)=>{
     const id = req.params.idVideogame
-    const allGames = await getAllGames();
-    if(id){
-        const gameId = await allGames.filter(e => e.id == id)
-        gameId.length ? res.status(200).json(gameId) : res.status(404).send('El ID no existe')
-    }
+    if(id.length < 34){
+        let gamesApi = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+        let gamesApiData = [{        
+            id: gamesApi.data.id,
+            name: gamesApi.data.name,
+            description: gamesApi.data.description.replace(/<[^>]+>/g, ''),
+            released: gamesApi.data.released,
+            rating: gamesApi.data.rating,
+            image: gamesApi.data.background_image,
+            platforms: gamesApi.data.platforms.map(e=>e.platform.name).join(", "),
+            genres: gamesApi.data.genres.map(e=>e.name).join(", ")    
+        }]
+        return res.status(200).send(gamesApiData)
+    } else if(id.length > 34){
+        let gamesDb= await getGamesDb()
+        let gamesDb2 = gamesDb.filter(e => e.id == id)
+         return res.status(200).send(gamesDb2)
+    }  return res.status(404).send('ID no encontrada')
 })
 
 router.get('/genres', async (req, res)=>{

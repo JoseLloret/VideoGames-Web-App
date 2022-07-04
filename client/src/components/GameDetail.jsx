@@ -5,11 +5,11 @@ import {useState, useEffect} from 'react';
 import { getDetails, Clean, deleteGame } from "../actions";
 import { useParams } from "react-router-dom"
 import './GameDetail.css'
+import ImgNotFound from '../Background-image/ImgNotFound.jpg'
 
 export default function GameDetail(){
     const dispatch = useDispatch();
     const gameDetail = useSelector((state) => state.detail);
-    
 
     const {id} = useParams()
     useEffect(()=>{
@@ -28,27 +28,29 @@ export default function GameDetail(){
    
 
     return(
-        <div className="background">
-            <div >
+        <div className="background-detail">            
                 {
-                    gameDetail.length>0 ?
-                    <div className="C-GD">
-                        <h1 className="Title">{gameDetail[0].name}</h1>
-                        <img src={gameDetail[0].image ? gameDetail[0].image : 'img not found'} width="80%" height="60%"></img>
-                        <h2 >ID: {gameDetail[0].id}</h2>
-                        <h2 >Descripcion: {gameDetail[0].description}</h2>
-                        <h2 >Lanzamiento: {gameDetail[0].released}</h2>
-                        <h2 >Rating: {gameDetail[0].rating}</h2>
-                        <h2 >Generos: {gameDetail[0].genres}</h2>                    
-                        <h2 >Plataformas: {gameDetail[0].platforms}</h2>
+                    gameDetail.length > 0 ?
+                    <div className="container">
+                        <div className="Title-D"><h1 className="Title-Detail">{gameDetail[0].name}</h1></div>
+                        <div className="Imagen-D"><img className='Img'src={gameDetail[0].image } ></img></div>            
+                        <div className="Detalle-D">
+                            <div className="info-detail">
+                            <h2 >Descripcion: {gameDetail[0].description}</h2>
+                            <h2 >Lanzamiento: {gameDetail[0].released}</h2>
+                            <h2 >Rating: {gameDetail[0].rating}</h2>
+                            <h2 >Generos: {gameDetail[0].genres}</h2>                    
+                            <h2 >Plataformas: {gameDetail[0].platforms}</h2>
+                            </div>                        
+                        </div>
+                        <div className="Botones-D">
                         <button className="button-GD" onClick={gameDelete}>Eliminar</button>
                         <Link to= '/home'>
                         <button className="button-GD">Volver</button>                
                         </Link>
-                    </div> : <div id="blurringTextG"><div id="blurringTextG_1" class="blurringTextG">L</div><div id="blurringTextG_2" class="blurringTextG">o</div><div id="blurringTextG_3" class="blurringTextG">a</div><div id="blurringTextG_4" class="blurringTextG">d</div><div id="blurringTextG_5" class="blurringTextG">i</div><div id="blurringTextG_6" class="blurringTextG">n</div><div id="blurringTextG_7" class="blurringTextG">g</div><div id="blurringTextG_8" class="blurringTextG">.</div><div id="blurringTextG_9" class="blurringTextG">.</div><div id="blurringTextG_10" class="blurringTextG">.</div></div>
-                }
-                
-            </div>            
+                        </div>
+                    </div> : <div id="blurringTextG" className="loading-hp"><div id="blurringTextG_1" class="blurringTextG">L</div><div id="blurringTextG_2" class="blurringTextG">o</div><div id="blurringTextG_3" class="blurringTextG">a</div><div id="blurringTextG_4" class="blurringTextG">d</div><div id="blurringTextG_5" class="blurringTextG">i</div><div id="blurringTextG_6" class="blurringTextG">n</div><div id="blurringTextG_7" class="blurringTextG">g</div><div id="blurringTextG_8" class="blurringTextG">.</div><div id="blurringTextG_9" class="blurringTextG">.</div><div id="blurringTextG_10" class="blurringTextG">.</div></div>
+                }             
         </div>
     )
 

@@ -1,20 +1,87 @@
-.background {
-    background: rgb(11, 9, 38) url(../Background-image/BG.jpg) center center/cover repeat;
+.background-detail {
+    background: url(../Background-image/BG.jpg);
+    background-position: center center;
+    background-repeat:repeat;
+    background-attachment: fixed;
+    background-size: cover;
     width: 100%;
-    height: 150vh;
+    height: auto;
     display: flex;
     justify-content: center;
 }
 
-.C-GD {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-start;
-    overflow: auto;
-    flex-direction: column;
-    color: #994caf;  
+.container {
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.1fr 0,3fr 0,3fr 0.1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "Title"
+      "Imagen"
+      "Detalle"
+      "Botones"; 
+    justify-content: center; 
+    align-content: center; 
+    justify-items: center; 
+    align-items: center; 
+  }
+  .Title-D { grid-area: Title; height: 100px; }
+  .Imagen-D {
+    justify-self: center; 
+    align-self: start; 
+    grid-area: Imagen; 
+  }
+  .Detalle-D { grid-area: Detalle; }
+  .Botones-D {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "Eliminar Volver"; 
+    grid-area: Botones; 
+  }
+  .Eliminar {
+    justify-self: end; 
+    align-self: center; 
+    grid-area: Eliminar; 
+  }
+  .Volver {
+    justify-self: start; 
+    align-self: center; 
+    grid-area: Volver; 
+  }
+.Title-Detail{
+    color: #994caf;
+    text-shadow: 500px black;
+    font-size: 50px;
+    height: 200px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    align-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow:
+		0 0 5px rgba(0,178,255,1),
+		0 0 10px rgba(0,178,255,1),
+		0 0 20px rgba(0,178,255,1),
+		0 0 40px rgba(38,104,127,1),
+		0 0 80px rgba(38,104,127,1),
+		0 0 90px rgba(38,104,127,1),
+		0 0 100px rgba(38,104,127,1),
+		0 0 140px rgba(38,104,127,1),
+		0 0 180px rgba(38,104,127,1);
+}
+.Img{
+    width: 1000px; 
+    height: 600px;
+}
+.info-detail{
+    background: rgba(128, 128, 128, 0.279);
+    box-shadow: 2px 2px 10px 1px #000;
+    color: #994caf;
+    font-size: small;
 }
 
 .button-GD{
@@ -31,7 +98,16 @@
     background-color: #e9ee90;
     color: black;
 }
+.botones-detail{
+    display: flex;
+}
 .loading{
     color: #994caf;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 

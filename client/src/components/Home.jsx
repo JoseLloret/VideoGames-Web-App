@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
 import './Home.css'
 import './loading.css'
+import ImgNotFound from '../Background-image/ImgNotFound.jpg'
 
 
 export default function Home(){
@@ -22,6 +23,7 @@ export default function Home(){
     const indexOfLastGame = currentPage * gamesPerPage // => 15
     const indexOfFirstGame = indexOfLastGame - gamesPerPage // => 0
     const currentGame = allGames.slice(indexOfFirstGame, indexOfLastGame) // me devuelve 15 juegos
+    
 
     useEffect(()=>{
         dispatch(getGames());
@@ -76,6 +78,9 @@ export default function Home(){
         setCurrentPage(1)
         console.log(e.target.value)
     }
+    function handleClickSearch(e){
+        setCurrentPage(1)
+    }
     
 
 
@@ -87,7 +92,7 @@ export default function Home(){
                 <div className="Title"><h1>VIDEOGAMES</h1></div>
                 <div className="Head">                
                     <div className="crear"><button><Link to= '/videogame'>agregar videojuego</Link></button></div>
-                    <div className="search"><SearchBar/></div>
+                    <div className="search" onClick={handleClickSearch}><SearchBar/></div>
                     <div className="refr"><button onClick={(e)=>refresh(e)}>Recargar</button></div>
                 </div>
                 <div className="Filters">
@@ -126,12 +131,11 @@ export default function Home(){
                     {currentGame.map( (c) =>{
                         return(
                             <Link to={"/home/" + c.id}>
-                            <Card name={c.name} image={c.image} genres={c.genres} rating={c.rating}/>
+                            <Card name={c.name} image={c.image ? c.image : ImgNotFound } genres={c.genres} rating={c.rating}/>
                             </Link> 
                         )
                     })}
                 </div>
-
                 <div className="Paginado">
                     <Paginado
                     gamesPerPage={gamesPerPage} // 15
@@ -139,7 +143,7 @@ export default function Home(){
                     paginado={paginado}
                     />
                 </div>
-            </div> : <div id="blurringTextG"><div id="blurringTextG_1" class="blurringTextG">L</div><div id="blurringTextG_2" class="blurringTextG">o</div><div id="blurringTextG_3" class="blurringTextG">a</div><div id="blurringTextG_4" class="blurringTextG">d</div><div id="blurringTextG_5" class="blurringTextG">i</div><div id="blurringTextG_6" class="blurringTextG">n</div><div id="blurringTextG_7" class="blurringTextG">g</div><div id="blurringTextG_8" class="blurringTextG">.</div><div id="blurringTextG_9" class="blurringTextG">.</div><div id="blurringTextG_10" class="blurringTextG">.</div></div>
+            </div> : <div id="blurringTextG" className="loading-hp"><div id="blurringTextG_1" class="blurringTextG">L</div><div id="blurringTextG_2" class="blurringTextG">o</div><div id="blurringTextG_3" class="blurringTextG">a</div><div id="blurringTextG_4" class="blurringTextG">d</div><div id="blurringTextG_5" class="blurringTextG">i</div><div id="blurringTextG_6" class="blurringTextG">n</div><div id="blurringTextG_7" class="blurringTextG">g</div><div id="blurringTextG_8" class="blurringTextG">.</div><div id="blurringTextG_9" class="blurringTextG">.</div><div id="blurringTextG_10" class="blurringTextG">.</div></div>
             }             
         </div>
     )

@@ -56,8 +56,8 @@ function rootReducer (state = initialState, action){
             return {
                 ...state,
                 games: state.games.sort(function(a, b){
-                    if(a.name < b.name) { return -1; }
-                    if(a.name > b.name) { return 1; }
+                    if(a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+                    if(a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
                     return 0;
                 })
             }
@@ -65,8 +65,8 @@ function rootReducer (state = initialState, action){
             return {
                 ...state,
                 games: state.games.sort(function(a, b){
-                    if(a.name > b.name) { return -1; }
-                    if(a.name < b.name) { return 1; }
+                    if(a.name.toLowerCase() > b.name.toLowerCase()) { return -1; }
+                    if(a.name.toLowerCase() < b.name.toLowerCase()) { return 1; }
                     return 0;
                 })
             }

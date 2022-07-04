@@ -56,7 +56,7 @@ export function getNameGame(name){
                 payload: names.data
             })
         } catch(error){
-            console.log(error)
+            return alert('Ese VideoGame no fue encontrado')
         }
     }
 }
