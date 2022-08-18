@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const axios = require('axios');
 const {Videogame, Genres, Platforms} = require ('../db');
-const express = require('express');
+// const express = require('express');
 const API_KEY= '3182f8c6ce8e46559273c22dc8401437'
 
 // Importar todos los routers;
@@ -28,6 +28,7 @@ router.get('/videogames', async(req, res)=>{
         res.status(200).send(allGames)
     }
 })
+
 
 // router.get('/videogame/:idVideogame', async (req, res)=>{
 //     const id = req.params.idVideogame
@@ -133,6 +134,8 @@ router.delete('/delete/:idVideogame', async (req, res, next)=>{
         next(error)
     }
 })
+
+
 
 
 module.exports = router;

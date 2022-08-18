@@ -117,7 +117,16 @@ function rootReducer (state = initialState, action){
             return{
                 ...state,
                 games: gamesFromFiltered
-            }     
+            }
+        case 'FILTRO_NUEVO':
+            console.log("Hola 3")
+            const gamesRating = state.allGames
+            const gamesRatingFiltered = gamesRating.filter(e => e.rating == 3)
+            console.log(gamesRatingFiltered)
+            return{
+                ...state,
+                games: gamesRatingFiltered,
+            }
         default:
             return state;
     }

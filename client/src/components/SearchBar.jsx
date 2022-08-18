@@ -13,8 +13,9 @@ export default function SearchBar(){
     }
 
     function handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault()        
         dispatch(getNameGame(name))
+        setName("")
     }
 
     return(
@@ -22,10 +23,10 @@ export default function SearchBar(){
             <input
                 type='text'
                 placeholder="Buscar..."
+                value={name}
                 onChange={(e)=> handleInputChange(e)} 
             />
             <button type="submit" onClick={(e)=> handleSubmit(e)}>Buscar</button>
         </div>
     )
-
 }

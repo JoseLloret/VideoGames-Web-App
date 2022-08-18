@@ -2,7 +2,7 @@ import React from "react";
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom'
-import{getGames,getGenres, filtroFromDb, filtroFromApi,filtroAsc, filtroDesc, filtroMax, filtroMin, filtroGenre, filtroFrom} from '../actions'
+import{getGames,getGenres,filtroAsc, filtroDesc, filtroMax, filtroMin, filtroGenre, filtroFrom, filtroNuevo} from '../actions'
 import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado";
@@ -13,20 +13,21 @@ import ImgNotFound from '../Background-image/ImgNotFound.jpg'
 
 export default function Home(){
     const dispatch = useDispatch();
-    const allGames = useSelector((state)=> state.games);
-    const allGenres = useSelector((state)=> state.genres)
-    const [orderAlfabet, setOrderAlfabet] = useState('');
-    const [orderRating, setOrderRating] = useState('');
+    const allGames = useSelector((state)=> state.games); // Es un hook que nos permite extraer datos del Store de Redux utilizando una funcion selectora
+    const allGenres = useSelector((state)=> state.genres);
+    const [orderAlfabet, setOrderAlfabet] = useState(''); // UseState permite trabajar con estados locales
+    const [orderRating, setOrderRating] = useState(''); // es una función que crea internamente una variable donde podremos almacenar el estado de nuestro componente.
     // const [orderFrom, setOrderFrom] = useState('');
     const [currentPage, setCurrentPage] = useState(1)
     const [gamesPerPage, setGamesPerPage] = useState(15)
     const indexOfLastGame = currentPage * gamesPerPage // => 15
     const indexOfFirstGame = indexOfLastGame - gamesPerPage // => 0
     const currentGame = allGames.slice(indexOfFirstGame, indexOfLastGame) // me devuelve 15 juegos
+    const filterStyle = {background: '#994caf',borderRadius: "5px", borderColor: "black", color:'#e9ee90', textTransform: 'uppercase', fontWeight: 'bold', textAlign:'center', padding: '5px', width: '200px'}
     
 
     useEffect(()=>{
-        dispatch(getGames());
+        dispatch(getGames()); // Este hook normalmente es usado para la inicialización de variables, llamadas a APIs o para limpiar un componente antes de desmontarlo del DOM.                          
     },[dispatch])
     useEffect(()=>{
         dispatch(getGenres());
@@ -81,6 +82,12 @@ export default function Home(){
     function handleClickSearch(e){
         setCurrentPage(1)
     }
+    function handleClick(e){
+        e.preventDefault();
+        console.log("Hola")
+        dispatch(filtroNuevo())
+        
+    }
     
 
 
@@ -91,38 +98,38 @@ export default function Home(){
             <div className="Conteiner">
                 <div className="Title"><h1>VIDEOGAMES</h1></div>
                 <div className="Head">                
-                    <div className="crear"><button><Link to= '/videogame'>agregar videojuego</Link></button></div>
+                    <div className="crear"><button><Link to= '/videogame' style={{textDecoration: 'none', color:'#e9ee90', width: '250px'}}>agregar </Link></button></div>
                     <div className="search" onClick={handleClickSearch}><SearchBar/></div>
                     <div className="refr"><button onClick={(e)=>refresh(e)}>Recargar</button></div>
                 </div>
                 <div className="Filters">
                     <div className="AZ">
-                    <select  value={orderAlfabet} onChange= {alfabetChange}>
-                        <option value="">Orden Alfabetico</option>               
-                        <option value= "az">Ascendente a descendente</option>  
-                        <option value= "za">Descendente a ascendente</option>
+                    <select style={filterStyle} value={orderAlfabet} onChange= {alfabetChange}>
+                        <option style={{backgroundColor:'#994caf'}} value="" >Orden Alfabetico</option>               
+                        <option style={{backgroundColor:'#994caf'}} value= "az">Ascendente a descendente</option>  
+                        <option style={{backgroundColor:'#994caf'}} value= "za">Descendente a ascendente</option>
                     </select>
                     </div>
                     <div className="RT">
-                    <select  value={orderRating} onChange= {ratingChange}>
-                        <option value="">Orden Rating</option> 
-                        <option value='min'>1 - 5</option>
-                        <option value='max'>5 - 1</option>
+                    <select  style={filterStyle} value={orderRating} onChange= {ratingChange}>
+                        <option style={{backgroundColor:'#994caf'}} value="">Orden Rating</option> 
+                        <option style={{backgroundColor:'#994caf'}} value='min'>1 - 5</option>
+                        <option style={{backgroundColor:'#994caf'}} value='max'>5 - 1</option>
                     </select>
                     </div>
                     <div className="GR">
-                    <select  onChange={e =>handleFilterStatus(e)}>
-                    <option value="all">Seleccionar Genero</option>                    
+                    <select style={filterStyle} onChange={e =>handleFilterStatus(e)}>
+                    <option style={{backgroundColor:'#994caf'}} value="all">Seleccionar Genero</option>                    
                         {allGenres.map((e)=>(
                             <option value={e.name}>{e.name}</option>
                         ))}
                     </select>
                     </div>
                     <div className="AB">
-                    <select   onChange= {e=> handleFilterFrom(e)}>
-                        <option value="">Info Desde</option>               
-                        <option value= "api">Desde API</option>  
-                        <option value= "db">Desde DB</option>
+                    <select  style={filterStyle} onChange= {e=> handleFilterFrom(e)}>
+                        <option style={{backgroundColor:'#994caf'}} value="">Info Desde</option>               
+                        <option style={{backgroundColor:'#994caf'}} value= "api">Desde API</option>  
+                        <option style={{backgroundColor:'#994caf'}} value= "db">Desde DB</option>
                     </select>
                     </div>
                 </div>
@@ -130,7 +137,7 @@ export default function Home(){
                 <div className="Games">
                     {currentGame.map( (c) =>{
                         return(
-                            <Link to={"/home/" + c.id}>
+                            <Link to={"/home/" + c.id} style={{textDecoration: 'none'}}>
                             <Card name={c.name} image={c.image ? c.image : ImgNotFound } genres={c.genres} rating={c.rating}/>
                             </Link> 
                         )

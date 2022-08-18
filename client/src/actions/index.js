@@ -3,7 +3,7 @@ import axios from 'axios';
 export function deleteGame(id){
     return async function(dispatch){
         try{
-            const deleted = await axios.delete(`http://localhost:3001/delete/${id}`)
+            await axios.delete(`http://localhost:3001/delete/${id}`)
             return dispatch({
                 type: 'GET_DELETE',
             })
@@ -16,7 +16,6 @@ export function deleteGame(id){
 export function getGames(){
     return async function(dispatch){
         const json = await axios.get("http://localhost:3001/videogames",{
-
         })
         return dispatch({
             type: 'GET_GAMES',
@@ -24,6 +23,8 @@ export function getGames(){
         })
     }
 }
+
+
 export function getPlatforms(){
     return async function(dispatch){
         const plat = await axios.get("http://localhost:3001/platforms",{
@@ -145,4 +146,11 @@ export function filtroFrom(payload){
         type: 'FILTER_FROM',
         payload
     }
+}
+
+export function filtroNuevo(){
+    console.log("hola 2")
+    return{
+        type: 'FILTRO_NUEVO',
+        }
 }
